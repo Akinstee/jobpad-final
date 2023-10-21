@@ -74,7 +74,7 @@ require_once("Db.php");
     <section id="applicants" class="content header">
         <div class="cntainer">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 mb-5">
                     <div class="box box-solid">
                         <div class="box-header with border">
                             <h3 class="box-title">Filters</h3>
@@ -112,12 +112,12 @@ require_once("Db.php");
 
                     $limit = 4;
                     
-                    $sql = "SELECT COUNT(job_posts_id) AS id FROM job_posts";
+                    $sql = "SELECT COUNT(job_post_id) AS id FROM job_posts";
                     $result = $conn->query($sql);
                     if($result->num_rows > 0){
-                        $roow = $result->fetch_assco();
+                        $row = $result->fetch_assoc();
                         $total_records = $row['id'];
-                        $total_pages = ceil($total_recors / $limit);
+                        $total_pages = ceil($total_records / $limit);
                     }else{
                         $total_pages = 1;
                     }
@@ -126,7 +126,7 @@ require_once("Db.php");
                     <div id="target-content">
 
                     </div>
-                    <div class="text-center">
+                    <div class="text-center mb-5">
                         <ul class="pagination text-center" id="pagination"></ul>
                     </div>
 
