@@ -180,7 +180,7 @@ p {
         <div class="login-logo">
             <a href="index.php"><b>Job</b>Pad</a>
         </div>
-        <div class="login-box-body">
+        <div class="login-box-body mb-5">
             <p class="login-box-msg">Applicants Login</p>
 
             <form action="checklogin.php" method="post">
@@ -197,7 +197,7 @@ p {
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 mt-4">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                 </div>
 

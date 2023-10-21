@@ -74,35 +74,34 @@ require_once("Db.php");
     <section id="applicants" class="content header">
         <div class="cntainer">
             <div class="row">
-                <div class="col-md-3 mb-5">
+                <div class="col-md-4 mb-5">
                     <div class="box box-solid">
-                        <div class="box-header with border">
-                            <h3 class="box-title">Filters</h3>
+                        <h3 class="box-title">Filters</h3>
+                        <div class="container text-center"> <!-- Center the dropdown -->
+                            <select class="form-control col-md-2 mt-4">
+                                <option disabled selected>Select a State</option>
+                                <optgroup label="State">
+                                    <option value="Abuja">Abuja</option>
+                                    <option value="Lagos">Lagos State</option>
+                                    <option value="Ogun">Ogun State</option>
+                                    <option value="Oyo">Oyo State</option>
+                                    <option value="Rivers">River State</option>
+                                </optgroup>
+                            </select>
                         </div>
-                        <div class="box-body no-padding">
-                            <ul class="nav nav-pills nav-stacked tree" data-widget="tree">
-                                <li class="treeview menu-open">
-                                    <a href="#"><i class="fa fa-plane text-red"></i>State <span class="pull-right"><i class="fa fa-angle-down pull-right"></i></span></a>
-                                    <ul class="treview-menu">
-                                        <li><a href="" class="stateSearch" data-target="Lagos"><i class="fa fa-circle-o text-yellow"></i>Lagos State</a></li>
-                                        <li><a href="" class="stateSearch" data-target="Ogun"><i class="fa fa-circle-o text-yellow"></i>Ogun State</a></li>
-                                        <li><a href="" class="stateSearch" data-target="Oyo"><i class="fa fa-circle-o text-yellow"></i>Oyo State</a></li>
-                                        <li><a href="" class="stateSearch" data-target="Abuja"><i class="fa fa-circle-o text-yellow"></i>Abuja</a></li>
-                                        <li><a href="" class="stateSearch" data-target="Rivers"><i class="fa fa-circle-o text-yellow"></i>River State</a></li>
-                                    </ul>
-                                </li>
-                                <li class="treeview menu-open">
-                                    <a href="#"><i class="fa fa-plane text-red"></i>Experience <span class="pull-right"><i class="fa fa-angle-down pull-right"></i></span></a>
-                                    <ul class="treeview-menu">
-                                        <li><a href="#" class="experienceSearch" data-target="1"><i class="fa fa-circle-o text-yellow"></i> > 1 year</a></li>
-                                        <li><a href="#" class="experienceSearch" data-target="2"><i class="fa fa-circle-o text-yellow"></i> > 2 years</a></li>
-                                        <li><a href="#" class="experienceSearch" data-target="3"><i class="fa fa-circle-o text-yellow"></i> > 3 years</a></li>
-                                        <li><a href="#" class="experienceSearch" data-target="4"><i class="fa fa-circle-o text-yellow"></i> > 4 years</a></li>
-                                        <li><a href="#" class="experienceSearch" data-target="5"><i class="fa fa-circle-o text-yellow"></i> > 5 years</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <div class="container text-center"> <!-- Center the dropdown -->
+                            <select class="form-control col-md-2 mt-4">
+                                <option disabled selected>Select Your Years of Experience</option>
+                                <optgroup label="Experience">
+                                    <option value="1">> 1 year</option>
+                                    <option value="2">> 2 years</option>
+                                    <option value="3">> 3 years</option>
+                                    <option value="4">> 4 years</option>
+                                    <option value="5">> 5 years</option>
+                                </optgroup>
+                            </select>
                         </div>
+
                     </div>
                 </div>
 
@@ -126,7 +125,7 @@ require_once("Db.php");
                     <div id="target-content">
 
                     </div>
-                    <div class="text-center mb-5">
+                    <div class="text-center">
                         <ul class="pagination text-center" id="pagination"></ul>
                     </div>
 
