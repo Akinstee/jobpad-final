@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 //To Handle Session Variables on This Page
 session_start();
@@ -6,60 +9,60 @@ session_start();
 //Including Database Connection From db.php file to avoid rewriting in all files
 require_once("classes/db.php");
 
+// var_dump($_POST);
+
 //If user Actually clicked login button 
 if(isset($_POST)) {
+	$email = $_POST['email'];
+	$password = $_POST['password'];
 
-	//Escape Special Characters in String
-	$email = mysqli_real_escape_string($conn, $_POST['email']);
-	$password = mysqli_real_escape_string($conn, $_POST['password']);
 
-	//Encrypt Password
-	$password = base64_encode(strrev(md5($password)));
+$stmt = $conn->prepare("SELECT * FROM company WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+$company = $result->fetch_assoc();
 
-	//sql query to check company login
-	$sql = "SELECT company_id, fullname, email, active FROM company WHERE email='$email' AND password='$password'";
-	$result = $conn->query($sql);
-
-	//if company table has this this login details
-	if($result->num_rows > 0) {
-		//output data
-		while($row = $result->fetch_assoc()) {
-
-			if($row['active'] == '2') {
-				$_SESSION['companyLoginError'] = "Your Account Is Still Pending Approval By Admin.";
-				header("Location: ../Company/login_company.php");
-				exit();
-			} else if($row['active'] == '0') {
-				$_SESSION['companyLoginError'] = "Your Account Is Rejected. Please Contact Admin For More Info.";
-				header("Location: ../Company/login_company.php");
-				exit();
-			} else if($row['active'] == '1') {
-				// active 1 means admin has approved account.
-				//Set some session variables for easy reference
-				$_SESSION['name'] = $row['fullname'];
-				$_SESSION['company_id'] = $row['company_id'];
-
-				//Redirect them to company dashboard once logged in successfully
-				header("Location: company/index.php");
-				exit();
-			} else if($row['active'] == '3') {
-				$_SESSION['companyLoginError'] = "Your Account Is Deactivated. Contact Admin For Reactivation.";
-				header("Location: ../Company/login_company.php");
-				exit();
-			}
-		}
- 	} else {
- 		//if no matching record found in user table then redirect them back to login page
- 		$_SESSION['loginError'] = $conn->error;
- 		header("Location: ../Company/login_company.php");
-		exit();
- 	}
-
- 	//Close database connection. Not compulsory but good practice.
- 	$conn->close();
+if ($company) {
+    if ($company['active'] == '2') {
+        $_SESSION['companyLoginError'] = "Your Account Is Still Pending Approval By Admin.";
+        header("Location: login.php");
+        exit();
+    } else if ($company['active'] == '0') {
+        $_SESSION['companyLoginError'] = "Your Account Is Rejected. Please Contact Admin For More Info.";
+        header("Location: login.php");
+        exit();
+    } else if ($company['active'] == '1') {
+        // Check the password here, assuming plain text password in the database
+        if ($password === $company['password']) {
+            // Password is correct
+            $_SESSION['name'] = $company['fullname'];
+            $_SESSION['company_id'] = $company['company_id'];
+            header("Location: index.php");
+            exit();
+        } else {
+            // Password is incorrect
+            $_SESSION['companyLoginError'] = "Invalid password.";
+            header("Location: login.php");
+            exit();
+        }
+    } else if ($company['active'] == '3') {
+        $_SESSION['companyLoginError'] = "Your Account Is Deactivated. Contact Admin For Reactivation.";
+        header("Location: login.php");
+        exit();
+    }
+} else {
+    $_SESSION['companyLoginError'] = "Invalid email.";
+    header("Location: login.php");
+    exit();
+}
+//Close database connection. Not compulsory but good practice.
+$conn->close();
 
 } else {
 	//redirect them back to login page if they didn't click login button
-	header("Location: index.php");
+	header("Location: login.php");
 	exit();
 }
+
+?>

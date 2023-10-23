@@ -45,7 +45,7 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
   <div class="login-box-body">
     <p class="login-box-msg">Company Login</p>
 
-    <form method="post" action="checkcompanylogin.php">
+    <form method="POST" action="checkcompanylogin.php">
       <div class="form-group has-feedback">
         <input type="email" name="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

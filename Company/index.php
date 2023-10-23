@@ -4,10 +4,18 @@ session_start();
     if(!isset($_SESSION['company_id'])){
         header('location:login.php');
     }
-    $company_id = $_SESSION['company_id'];
+    $company_id = $_SESSION['company_id'];    
+    $company_name = $_SESSION['name'];
+
     ini_set('display_errors', '1');
     ini_set('display_startup_errors', '1');
     error_reporting(E_ALL);
+
+    // var_dump($_SESSION['company_id']);
+    // var_dump($_SESSION['name']);
+
+    // echo '$company_id';
+    // echo '$company_name';
 ?>
 
 <!DOCTYPE html>
