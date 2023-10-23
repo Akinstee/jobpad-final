@@ -6,5 +6,5 @@ define("DBNAME", "root");
 //Database User
 define("DBUSER", "jobpad");
 //Database Password
-define("DBPASS", "");
+define("DBPASS", "root");
 ?>

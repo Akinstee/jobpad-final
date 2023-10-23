@@ -3,7 +3,7 @@
 //Your Mysql Config
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 $dbname = "jobpad";
 
 //Create New Database Connection

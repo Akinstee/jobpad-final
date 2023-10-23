@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('classes/Db.php');
 
 // Collect POST data
@@ -11,11 +12,11 @@ $stmt->execute();
 $result = $stmt->get_result();
 $admin= $result->fetch_assoc();
 
-if ($admin&& $password === $admin['password']) {
+if ($admin && $password === $admin['password']) {
     // Password is correct, set session variables and redirect to dashboard
     session_start();
-    $_SESSION['admin_id'] = $totalPendingCompanyApproval['admin_id'];
-    $_SESSION['email'] = $admin['email'];
+    $_SESSION['admin_id'] = $admin['admin_id'];
+    $_SESSION['email'] = $_POST['email'];
     header("Location: dashboard.php");
     exit();
 } else {
